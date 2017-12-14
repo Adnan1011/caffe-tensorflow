@@ -78,9 +78,6 @@ class DataInjector(object):
                 squeeze_indices.append(1)
             if node.kind == NodeKind.InnerProduct:
                 squeeze_indices.append(0)  # Squeeze FC.
-        elif node.kind == NodeKind.BatchNorm:
-            # Squeeze all batch norm parameters
-            squeeze_indices = range(len(data))
         for idx in squeeze_indices:
             data[idx] = np.squeeze(data[idx])
         return data
